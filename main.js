@@ -2,6 +2,7 @@
 const IMG_SIZE = 60;
 const WALLY_COUNT = 5;
 const ODLO_COUNT = 5;
+const GAME_DURATION_SEC = 105;
 
 const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect();
@@ -12,6 +13,24 @@ const gameScore = document.querySelector('.game__score');
 let started = false;
 let score = 0;
 let timer = undefined;
+
+const updateTimerText = (time) => {
+   const minutes = Math.floor(time / 60);
+   const seconds = time % 60;
+   gameTimer.innerText = `${minutes} : ${seconds}`;
+};
+
+const startGameTimer = () => {
+   let remainigTimeSec = GAME_DURATION_SEC;
+   updateTimerText(remainigTimeSec);
+   timer = setInterval(() => {
+      if (remainigTimeSec <= 0) {
+         clearInterval(timer);
+         return;
+      }
+      updateTimerText(--remainigTimeSec);
+   }, 1000);
+};
 
 const showTimerAndScore = () => {
    gameTimer.style.visibility = 'visible';
@@ -30,16 +49,8 @@ const startGame = () => {
    initGame();
    showStopButton();
    showTimerAndScore();
+   startGameTimer();
 };
-
-gameBtn.addEventListener('click', () => {
-   if (started) {
-      stopGame();
-   } else {
-      startGame();
-   }
-   started = !started;
-});
 
 const randomNumber = (min, max) => {
    return Math.random() * (max - min) + min;
@@ -66,7 +77,16 @@ const addItem = (className, count, imgPath) => {
 
 const initGame = () => {
    field.innerHTML = '';
-   gameScore.innerHTML = WALLY_COUNT;
+   gameScore.innerText = WALLY_COUNT;
    addItem('wally', WALLY_COUNT, 'img/wally.png');
    addItem('odlo', ODLO_COUNT, 'img/odlo.png');
 };
+
+gameBtn.addEventListener('click', () => {
+   if (started) {
+      stopGame();
+   } else {
+      startGame();
+   }
+   started = !started;
+});
