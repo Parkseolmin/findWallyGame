@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="style.css" />
+      <script src="main.js" defer></script>
+      <script
+         src="https://kit.fontawesome.com/304a0b5787.js"
+         crossorigin="anonymous"
+      ></script>
+   </head>
+   <body>
+      <!-- game 화면 -->
+      <section class="game">
+         <img
+            class="game__background"
+            src="img/wallytown2.png"
+            alt="게임 배경"
+         />
+         <!-- 게임 메뉴 -->
+         <div class="game__intro">
+            <button class="game__button">
+               <i class="fa-solid fa-play"></i>
+            </button>
+            <span class="game__time">00:00:00</span>
+            <span class="game__score">남은 월리 : 0</span>
+         </div>
+         <!-- 게임 필드 -->
+         <div class="game__field"></div>
+      </section>
+      <!-- 팝업 창 -->
+      <section class="pop-up hide">
+         <button class="pop-up__refresh">
+            <i class="fa-solid fa-rotate-right"></i>
+         </button>
+         <span class="pop-up__message">You Win!</span>
+      </section>
+   </body>
+</html>
